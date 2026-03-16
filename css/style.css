@@ -358,6 +358,8 @@ body.dark-theme .theme-icon-sun {
   font-weight: 700;
 }
 
+
+
 .catalog-side-link:hover,
 .catalog-side-link.active {
   background: var(--surface);

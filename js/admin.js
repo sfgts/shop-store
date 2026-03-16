@@ -64,6 +64,7 @@ const catalogLinksList = document.getElementById("catalogLinksList");
    Catalog state
 ========================= */
 
+
 let sectionsState = [];
 let columnsState = [];
 let linksState = [];

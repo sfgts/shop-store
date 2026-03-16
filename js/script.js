@@ -37,6 +37,7 @@ let heroIntervalId = null;
 
 /* =========================
    Helpers
+   
 ========================= */
 
 function readStorage(key, fallback) {
