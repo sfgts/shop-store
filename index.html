@@ -28,122 +28,8 @@
         </button>
 
         <div class="catalog-menu">
-          <div class="catalog-menu-inner">
-            <aside class="catalog-sidebar">
-              <button class="catalog-side-link active" type="button" data-menu="premier">
-                Premier League
-              </button>
-              <button class="catalog-side-link" type="button" data-menu="laliga">
-                LALIGA
-              </button>
-              <button class="catalog-side-link" type="button" data-menu="seriea">
-                Serie A
-              </button>
-              <button class="catalog-side-link" type="button" data-menu="bundesliga">
-                Bundesliga
-              </button>
-              <button class="catalog-side-link" type="button" data-menu="ligue1">
-                Ligue 1
-              </button>
-              <button class="catalog-side-link" type="button" data-menu="national">
-                National Teams
-              </button>
-            </aside>
-
-            <div class="catalog-panels">
-              <div class="catalog-panel active" data-panel="premier">
-                <div class="catalog-columns">
-                  <div class="catalog-column">
-                    <h4>Top clubs</h4>
-                    <a href="#">Arsenal</a>
-                    <a href="#">Chelsea</a>
-                    <a href="#">Liverpool</a>
-                    <a href="#">Manchester City</a>
-                    <a href="#">Manchester United</a>
-                  </div>
-                  <div class="catalog-column">
-                    <h4>Shop by type</h4>
-                    <a href="#">Home shirts</a>
-                    <a href="#">Away shirts</a>
-                    <a href="#">Third kits</a>
-                    <a href="#">Player version</a>
-                  </div>
-                  <div class="catalog-column">
-                    <h4>Extras</h4>
-                    <a href="#">Training wear</a>
-                    <a href="#">Jackets</a>
-                    <a href="#">Retro shirts</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="catalog-panel" data-panel="laliga">
-                <div class="catalog-columns">
-                  <div class="catalog-column">
-                    <h4>Top clubs</h4>
-                    <a href="#">Real Madrid</a>
-                    <a href="#">Barcelona</a>
-                    <a href="#">Atletico Madrid</a>
-                    <a href="#">Sevilla</a>
-                  </div>
-                  <div class="catalog-column">
-                    <h4>Shop by type</h4>
-                    <a href="#">Home shirts</a>
-                    <a href="#">Away shirts</a>
-                    <a href="#">Third kits</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="catalog-panel" data-panel="seriea">
-                <div class="catalog-columns">
-                  <div class="catalog-column">
-                    <h4>Top clubs</h4>
-                    <a href="#">Milan</a>
-                    <a href="#">Inter</a>
-                    <a href="#">Juventus</a>
-                    <a href="#">Roma</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="catalog-panel" data-panel="bundesliga">
-                <div class="catalog-columns">
-                  <div class="catalog-column">
-                    <h4>Top clubs</h4>
-                    <a href="#">Bayern</a>
-                    <a href="#">Dortmund</a>
-                    <a href="#">Leverkusen</a>
-                    <a href="#">Leipzig</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="catalog-panel" data-panel="ligue1">
-                <div class="catalog-columns">
-                  <div class="catalog-column">
-                    <h4>Top clubs</h4>
-                    <a href="#">PSG</a>
-                    <a href="#">Marseille</a>
-                    <a href="#">Lyon</a>
-                    <a href="#">Monaco</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="catalog-panel" data-panel="national">
-                <div class="catalog-columns">
-                  <div class="catalog-column">
-                    <h4>National teams</h4>
-                    <a href="#">England</a>
-                    <a href="#">France</a>
-                    <a href="#">Germany</a>
-                    <a href="#">Spain</a>
-                    <a href="#">Ukraine</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="catalog-menu-inner" id="catalogMenuInner">
+            <div class="catalog-loading">Loading catalog...</div>
           </div>
         </div>
       </div>
@@ -298,6 +184,7 @@
     <span class="theme-icon theme-icon-sun">☀</span>
   </button>
 
-  <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

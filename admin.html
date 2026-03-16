@@ -13,6 +13,7 @@
 
       <nav class="sidebar-nav">
         <a href="#heroPanel" class="active">Hero</a>
+        <a href="#catalogPanel">Catalog</a>
         <a href="#collectionsPanel">Collections</a>
         <a href="#productsPanel">Products</a>
       </nav>
@@ -61,6 +62,147 @@
             </div>
           </form>
         </section>
+
+        <!-- CATALOG -->
+<section class="panel" id="catalogPanel">
+  <div class="panel-head">
+    <h2>Catalog management</h2>
+    <p>Manage menu sections, columns and links without editing site code.</p>
+  </div>
+
+  <div class="catalog-admin-layout">
+    <div class="catalog-admin-side">
+      <div class="panel-head catalog-subhead">
+        <h3>Add catalog section</h3>
+        <p>Create top-level menu items like Premier League or LALIGA.</p>
+      </div>
+
+      <form id="catalogSectionForm" class="product-form">
+        <div class="form-group">
+          <label for="sectionName">Section name</label>
+          <input type="text" id="sectionName" placeholder="Premier League" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sectionSlug">Slug</label>
+            <input type="text" id="sectionSlug" placeholder="premier-league" />
+          </div>
+
+          <div class="form-group">
+            <label for="sectionOrder">Sort order</label>
+            <input type="number" id="sectionOrder" placeholder="1" />
+          </div>
+        </div>
+
+        <div class="form-row checks">
+          <label class="check-item">
+            <input type="checkbox" id="sectionActive" checked />
+            <span>Active</span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-dark">Save section</button>
+          <button type="reset" class="btn btn-light">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="catalog-admin-main">
+      <div class="panel-head catalog-subhead">
+        <h3>Sections list</h3>
+        <p>Saved catalog sections will appear here.</p>
+      </div>
+
+      <div id="catalogSectionsList" class="catalog-entity-list">
+        <div class="empty-state">No catalog sections added yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="catalog-admin-grid">
+    <div class="catalog-box">
+      <div class="panel-head catalog-subhead">
+        <h3>Add column</h3>
+        <p>Add columns inside a selected section, for example Top clubs or Extras.</p>
+      </div>
+
+      <form id="catalogColumnForm" class="product-form">
+        <div class="form-group">
+          <label for="columnSection">Parent section</label>
+          <select id="columnSection">
+            <option value="">Select section</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="columnTitle">Column title</label>
+          <input type="text" id="columnTitle" placeholder="Top clubs" />
+        </div>
+
+        <div class="form-group">
+          <label for="columnOrder">Sort order</label>
+          <input type="number" id="columnOrder" placeholder="1" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-dark">Save column</button>
+        </div>
+      </form>
+
+      <div id="catalogColumnsList" class="catalog-entity-list compact-list">
+        <div class="empty-state">No columns added yet.</div>
+      </div>
+    </div>
+
+    <div class="catalog-box">
+      <div class="panel-head catalog-subhead">
+        <h3>Add link</h3>
+        <p>Add links inside a selected column, for example Arsenal or Home shirts.</p>
+      </div>
+
+      <form id="catalogLinkForm" class="product-form">
+        <div class="form-group">
+          <label for="linkColumn">Parent column</label>
+          <select id="linkColumn">
+            <option value="">Select column</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="linkLabel">Link label</label>
+          <input type="text" id="linkLabel" placeholder="Arsenal" />
+        </div>
+
+        <div class="form-group">
+          <label for="linkUrl">URL</label>
+          <input type="text" id="linkUrl" placeholder="/catalog/premier-league/arsenal" />
+        </div>
+
+        <div class="form-group">
+          <label for="linkOrder">Sort order</label>
+          <input type="number" id="linkOrder" placeholder="1" />
+        </div>
+
+        <div class="form-row checks">
+          <label class="check-item">
+            <input type="checkbox" id="linkActive" checked />
+            <span>Active</span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-dark">Save link</button>
+        </div>
+      </form>
+
+      <div id="catalogLinksList" class="catalog-entity-list compact-list">
+        <div class="empty-state">No links added yet.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
         <!-- COLLECTIONS -->
         <section class="panel" id="collectionsPanel">
@@ -199,6 +341,7 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>

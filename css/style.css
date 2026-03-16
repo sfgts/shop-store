@@ -834,3 +834,88 @@ body.dark-theme .theme-icon-sun {
     padding: 28px 20px;
   }
 }
+
+
+.catalog-loading {
+  padding: 28px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.catalog-empty {
+  padding: 28px;
+  color: var(--muted);
+}
+
+.catalog-menu-inner {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 420px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.catalog-sidebar {
+  padding: 18px;
+  border-right: 1px solid var(--line);
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.catalog-side-link {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 14px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.catalog-side-link:hover,
+.catalog-side-link.active {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.catalog-panels {
+  padding: 26px 28px;
+  background: var(--surface);
+}
+
+.catalog-panel {
+  display: none;
+}
+
+.catalog-panel.active {
+  display: block;
+}
+
+.catalog-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 28px;
+}
+
+.catalog-column h4 {
+  margin-bottom: 14px;
+  font-size: 20px;
+}
+
+.catalog-column a {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+.catalog-column a:hover {
+  color: var(--text);
+}

@@ -1,7 +1,31 @@
+console.log("storefront script loaded");
+
+/* =========================
+   Supabase
+========================= */
+
+const SUPABASE_URL = "https://puoaaphhdozbhqtdaejw.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_nPQPfB6BPwVDVyD01u0gZQ_-FTbOOF-";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+/* =========================
+   Keys
+========================= */
+
+const HERO_KEY = "fcstoreua_hero";
 const THEME_KEY = "fcstoreua_theme";
+
+/* =========================
+   DOM
+========================= */
 
 const heroSlider = document.getElementById("heroSlider");
 const themeToggle = document.getElementById("themeToggle");
+const catalogMenuInner = document.getElementById("catalogMenuInner");
 
 const leagueImagePremierLeague = document.getElementById("leagueImagePremierLeague");
 const leagueImageLaLiga = document.getElementById("leagueImageLaLiga");
@@ -11,11 +35,19 @@ const leagueImageLigue1 = document.getElementById("leagueImageLigue1");
 
 let heroIntervalId = null;
 
-const HERO_SLIDES = [
-  "images/hero/hero-1.png",
-  "images/hero/hero-2.png",
-  "images/hero/hero-3.png"
-];
+/* =========================
+   Helpers
+========================= */
+
+function readStorage(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (error) {
+    console.error(`Failed to read ${key}:`, error);
+    return fallback;
+  }
+}
 
 function escapeHtml(text) {
   if (text === null || text === undefined) return "";
@@ -31,10 +63,12 @@ function createImageTag(src, alt, className) {
   return `<img src="${src}" alt="${escapeHtml(alt)}" class="${className}">`;
 }
 
-/* theme */
+/* =========================
+   Theme
+========================= */
 
 function getSavedTheme() {
-  return localStorage.getItem(THEME_KEY) || "dark";
+  return localStorage.getItem(THEME_KEY) || "light";
 }
 
 function updateThemeButton(theme) {
@@ -72,17 +106,24 @@ function initTheme() {
   });
 }
 
-/* hero */
+/* =========================
+   Hero slider
+========================= */
+
+function getHeroData() {
+  return readStorage(HERO_KEY, { slides: [] });
+}
 
 function renderHeroSlider() {
   if (!heroSlider) return;
+
+  const hero = getHeroData();
+  const slides = (hero.slides || []).filter(Boolean);
 
   if (heroIntervalId) {
     clearInterval(heroIntervalId);
     heroIntervalId = null;
   }
-
-  const slides = HERO_SLIDES.filter(Boolean);
 
   if (!slides.length) {
     heroSlider.innerHTML = `<div class="hero-slide-placeholder">FCStoreUA</div>`;
@@ -111,10 +152,12 @@ function renderHeroSlider() {
     images[currentIndex].classList.remove("active");
     currentIndex = (currentIndex + 1) % images.length;
     images[currentIndex].classList.add("active");
-  }, 3500);
+  }, 3000);
 }
 
-/* league images */
+/* =========================
+   League images
+========================= */
 
 function renderLeagueImage(container, src, fallbackText, altText) {
   if (!container) return;
@@ -163,7 +206,9 @@ function renderLeagueImages() {
   );
 }
 
-/* league slider */
+/* =========================
+   League slider
+========================= */
 
 function initLeagueSlider() {
   const slider = document.getElementById("leagueSlider");
@@ -172,7 +217,7 @@ function initLeagueSlider() {
 
   if (!slider) return;
 
-  const cardWidth = 298;
+  const cardWidth = 280;
 
   if (right) {
     right.addEventListener("click", () => {
@@ -193,11 +238,111 @@ function initLeagueSlider() {
   }
 }
 
-function initCatalog() {
+/* =========================
+   Catalog from Supabase
+========================= */
+
+async function loadCatalogData() {
+  const [{ data: sections, error: sectionsError }, { data: columns, error: columnsError }, { data: links, error: linksError }] =
+    await Promise.all([
+      supabaseClient
+        .from("catalog_sections")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true })
+        .order("id", { ascending: true }),
+
+      supabaseClient
+        .from("catalog_columns")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("id", { ascending: true }),
+
+      supabaseClient
+        .from("catalog_links")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true })
+        .order("id", { ascending: true })
+    ]);
+
+  if (sectionsError) throw sectionsError;
+  if (columnsError) throw columnsError;
+  if (linksError) throw linksError;
+
+  return {
+    sections: sections || [],
+    columns: columns || [],
+    links: links || []
+  };
+}
+
+function buildCatalogHtml(sections, columns, links) {
+  if (!sections.length) {
+    return `<div class="catalog-empty">Catalog is empty.</div>`;
+  }
+
+  const sidebarHtml = `
+    <aside class="catalog-sidebar">
+      ${sections
+        .map((section, index) => {
+          return `
+            <button
+              class="catalog-side-link ${index === 0 ? "active" : ""}"
+              type="button"
+              data-menu="${section.id}"
+            >
+              ${escapeHtml(section.name)}
+            </button>
+          `;
+        })
+        .join("")}
+    </aside>
+  `;
+
+  const panelsHtml = `
+    <div class="catalog-panels">
+      ${sections
+        .map((section, index) => {
+          const sectionColumns = columns.filter(
+            (column) => Number(column.section_id) === Number(section.id)
+          );
+
+          return `
+            <div class="catalog-panel ${index === 0 ? "active" : ""}" data-panel="${section.id}">
+              <div class="catalog-columns">
+                ${sectionColumns
+                  .map((column) => {
+                    const columnLinks = links.filter(
+                      (link) => Number(link.column_id) === Number(column.id)
+                    );
+
+                    return `
+                      <div class="catalog-column">
+                        <h4>${escapeHtml(column.title)}</h4>
+                        ${columnLinks
+                          .map((link) => {
+                            return `<a href="${escapeHtml(link.url)}">${escapeHtml(link.label)}</a>`;
+                          })
+                          .join("")}
+                      </div>
+                    `;
+                  })
+                  .join("")}
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+
+  return `${sidebarHtml}${panelsHtml}`;
+}
+
+function initCatalogHover() {
   const catalogLinks = document.querySelectorAll(".catalog-side-link");
   const catalogPanels = document.querySelectorAll(".catalog-panel");
-
-  if (!catalogLinks.length || !catalogPanels.length) return;
 
   catalogLinks.forEach((btn) => {
     btn.addEventListener("mouseenter", () => {
@@ -219,12 +364,29 @@ function initCatalog() {
   });
 }
 
+async function renderCatalogFromDatabase() {
+  if (!catalogMenuInner) return;
+
+  try {
+    const { sections, columns, links } = await loadCatalogData();
+    catalogMenuInner.innerHTML = buildCatalogHtml(sections, columns, links);
+    initCatalogHover();
+  } catch (error) {
+    console.error("Catalog load failed:", error);
+    catalogMenuInner.innerHTML = `<div class="catalog-empty">Failed to load catalog.</div>`;
+  }
+}
+
+/* =========================
+   Init
+========================= */
+
 function initStorefront() {
   initTheme();
-  initCatalog();
   renderHeroSlider();
   renderLeagueImages();
   initLeagueSlider();
+  renderCatalogFromDatabase();
 }
 
 document.addEventListener("DOMContentLoaded", initStorefront);
