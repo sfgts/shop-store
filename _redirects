@@ -1,0 +1,5 @@
+# Netlify redirects — clean URLs for catalog and product pages
+/catalog/:section              /catalog.html    200
+/catalog/:section/:column      /catalog.html    200
+/catalog/:section/:column/:team /catalog.html   200
+/product/:slug                 /product.html    200

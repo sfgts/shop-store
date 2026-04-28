@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product | FCStoreUA</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="dark-theme">
+
+  <div class="top-bar">
+    <p>Official football shirts store • Shop by league</p>
+  </div>
+
+  <header class="header">
+    <div class="container header-wrap">
+      <a href="index.html" class="logo">FCStore<span>UA</span></a>
+      <div class="header-center">
+        <div class="catalog-dropdown">
+          <button class="catalog-btn" type="button" aria-label="Open catalog">
+            <span class="catalog-btn-icon">☰</span><span>Catalog</span>
+          </button>
+          <div class="catalog-menu">
+            <div class="catalog-menu-inner" id="catalogMenuInner">
+              <div class="catalog-loading">Loading catalog...</div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="index.html#leagues">Leagues</a>
+          <a href="catalog.html">Catalog</a>
+        </nav>
+      </div>
+      <div class="header-actions">
+        <div id="currencyContainer"></div>
+        <button id="themeToggle" class="action-btn theme-toggle" type="button" aria-label="Switch theme">
+          <span class="theme-icon theme-icon-moon">☾</span>
+          <span class="theme-icon theme-icon-sun">☀</span>
+        </button>
+        <button class="action-btn" type="button">Search</button>
+        <button class="action-btn" type="button">Account</button>
+        <a href="checkout.html" class="cart-btn" id="cartBtn">Cart (0)</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container" id="ppRoot">
+      <div class="pp-state">Loading product…</div>
+    </div>
+
+    <!-- Related products -->
+    <section class="products-section" id="relatedSection" style="display:none">
+      <div class="container">
+        <div class="section-head">
+          <h2>More from this team</h2>
+        </div>
+        <div class="product-slider-wrapper">
+          <button class="league-arrow league-arrow-left" id="relatedLeft" type="button">‹</button>
+          <div class="product-slider" id="relatedSlider"></div>
+          <button class="league-arrow league-arrow-right" id="relatedRight" type="button">›</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="logo footer-logo">FCStore<span>UA</span></a>
+        <p class="footer-text">Modern football shirt store concept.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="catalog.html">All products</a></li>
+          <li><a href="index.html#new-arrivals">New arrivals</a></li>
+          <li><a href="index.html#featured">Featured</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Delivery</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/currency.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>

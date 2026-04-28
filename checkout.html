@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | FCStoreUA</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="dark-theme">
+
+  <div class="top-bar">
+    <p>Official football shirts store • Shop by league</p>
+  </div>
+
+  <header class="header">
+    <div class="container header-wrap">
+      <a href="index.html" class="logo">FCStore<span>UA</span></a>
+      <div class="header-center">
+        <div class="catalog-dropdown">
+          <button class="catalog-btn" type="button" aria-label="Open catalog">
+            <span class="catalog-btn-icon">☰</span><span>Catalog</span>
+          </button>
+          <div class="catalog-menu">
+            <div class="catalog-menu-inner" id="catalogMenuInner">
+              <div class="catalog-loading">Loading catalog...</div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="catalog.html">Catalog</a>
+        </nav>
+      </div>
+      <div class="header-actions">
+        <div id="currencyContainer"></div>
+        <button id="themeToggle" class="action-btn theme-toggle" type="button" aria-label="Switch theme">
+          <span class="theme-icon theme-icon-moon">☾</span>
+          <span class="theme-icon theme-icon-sun">☀</span>
+        </button>
+        <a href="checkout.html" class="cart-btn" id="cartBtn">Cart (0)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="checkout-main">
+    <div class="container">
+
+      <!-- empty cart state -->
+      <div id="checkoutEmpty" class="checkout-empty" style="display:none">
+        <div class="checkout-empty-icon">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p>Add some shirts to your cart before checking out.</p>
+        <a href="catalog.html" class="btn btn-dark">Browse catalog</a>
+      </div>
+
+      <!-- checkout content -->
+      <div id="checkoutContent" class="checkout-grid" style="display:none">
+
+        <!-- LEFT: form -->
+        <div class="checkout-form-col">
+          <h1 class="checkout-title">Checkout</h1>
+
+          <section class="checkout-section">
+            <h2 class="checkout-section-title">Contact information</h2>
+            <div class="checkout-row-2">
+              <div class="checkout-field">
+                <label for="firstName">First name *</label>
+                <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+              </div>
+              <div class="checkout-field">
+                <label for="lastName">Last name *</label>
+                <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+              </div>
+            </div>
+            <div class="checkout-row-2">
+              <div class="checkout-field">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com">
+              </div>
+              <div class="checkout-field">
+                <label for="phone">Phone *</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="+380 XX XXX XXXX">
+              </div>
+            </div>
+          </section>
+
+          <section class="checkout-section">
+            <h2 class="checkout-section-title">Delivery</h2>
+            <div class="checkout-field">
+              <label>Delivery method</label>
+              <div class="checkout-delivery-options" id="deliveryOptions">
+                <label class="delivery-option active" data-val="nova-poshta">
+                  <input type="radio" name="delivery" value="nova-poshta" checked>
+                  <span class="delivery-option-dot"></span>
+                  <span class="delivery-option-label">Nova Poshta</span>
+                  <span class="delivery-option-note">1–3 days</span>
+                </label>
+                <label class="delivery-option" data-val="ukrposhta">
+                  <input type="radio" name="delivery" value="ukrposhta">
+                  <span class="delivery-option-dot"></span>
+                  <span class="delivery-option-label">Ukrposhta</span>
+                  <span class="delivery-option-note">3–7 days</span>
+                </label>
+                <label class="delivery-option" data-val="courier">
+                  <input type="radio" name="delivery" value="courier">
+                  <span class="delivery-option-dot"></span>
+                  <span class="delivery-option-label">Courier (Kyiv)</span>
+                  <span class="delivery-option-note">Next day</span>
+                </label>
+                <label class="delivery-option" data-val="pickup">
+                  <input type="radio" name="delivery" value="pickup">
+                  <span class="delivery-option-dot"></span>
+                  <span class="delivery-option-label">Self pickup</span>
+                  <span class="delivery-option-note">Free</span>
+                </label>
+              </div>
+            </div>
+
+            <div id="addressFields">
+              <div class="checkout-row-2">
+                <div class="checkout-field">
+                  <label for="city">City *</label>
+                  <input type="text" id="city" name="city" required>
+                </div>
+                <div class="checkout-field" id="branchField">
+                  <label for="branch">Branch / Post office #</label>
+                  <input type="text" id="branch" name="branch">
+                </div>
+              </div>
+              <div class="checkout-field" id="streetField" style="display:none">
+                <label for="street">Street &amp; house number *</label>
+                <input type="text" id="street" name="street">
+              </div>
+            </div>
+          </section>
+
+          <section class="checkout-section">
+            <h2 class="checkout-section-title">Comment</h2>
+            <div class="checkout-field">
+              <label for="comment">Order note (optional)</label>
+              <textarea id="comment" name="comment" rows="3"></textarea>
+            </div>
+          </section>
+
+          <button id="placeOrderBtn" type="button" class="btn btn-dark checkout-submit-btn">
+            Place order
+          </button>
+          <p id="checkoutError" class="checkout-error" style="display:none"></p>
+        </div>
+
+        <!-- RIGHT: order summary -->
+        <div class="checkout-summary-col">
+          <div class="checkout-summary-box">
+            <div class="checkout-summary-head">
+              <h2 class="checkout-section-title">Your order</h2>
+              <a href="catalog.html" class="checkout-continue">+ Add more</a>
+            </div>
+
+            <div id="checkoutItemsList" class="checkout-items"></div>
+
+            <div class="checkout-totals">
+              <div class="checkout-total-row">
+                <span>Subtotal</span>
+                <span id="subtotalVal">—</span>
+              </div>
+              <div class="checkout-total-row">
+                <span>Delivery</span>
+                <span id="deliveryVal">calculated after address</span>
+              </div>
+              <div class="checkout-total-row checkout-total-grand">
+                <span>Total</span>
+                <span id="totalVal">—</span>
+              </div>
+            </div>
+
+            <p class="checkout-secure"><span>🔒</span> Secure order. No payment data is stored.</p>
+          </div>
+        </div>
+
+      </div><!-- /checkout-grid -->
+    </div>
+
+    <!-- Success overlay -->
+    <div id="checkoutSuccess" class="checkout-success-overlay" style="display:none">
+      <div class="checkout-success-box">
+        <div class="checkout-success-icon">✓</div>
+        <h2>Order placed!</h2>
+        <p id="successMsg">Thank you! We'll contact you shortly to confirm your order.</p>
+        <a href="index.html" class="btn btn-dark">Back to home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="logo footer-logo">FCStore<span>UA</span></a>
+        <p class="footer-text">Modern football shirt store concept.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="catalog.html">All products</a></li>
+          <li><a href="index.html#new-arrivals">New arrivals</a></li>
+          <li><a href="index.html#featured">Featured</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Delivery</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/currency.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

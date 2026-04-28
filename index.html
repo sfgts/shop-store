@@ -12,53 +12,38 @@
     <p>Official football shirts store • Shop by league</p>
   </div>
 
- <header class="header">
-  <div class="container header-wrap">
-    <a href="index.html" class="logo">FCStore<span>UA</span></a>
-
-    <div class="header-center">
-      <div class="catalog-dropdown">
-        <button
-          class="catalog-btn"
-          type="button"
-          aria-label="Open catalog"
-        >
-          <span class="catalog-btn-icon">☰</span>
-          <span>Catalog</span>
-        </button>
-
-        <div class="catalog-menu">
-          <div class="catalog-menu-inner" id="catalogMenuInner">
-            <div class="catalog-loading">Loading catalog...</div>
+  <header class="header">
+    <div class="container header-wrap">
+      <a href="index.html" class="logo">FCStore<span>UA</span></a>
+      <div class="header-center">
+        <div class="catalog-dropdown">
+          <button class="catalog-btn" type="button" aria-label="Open catalog">
+            <span class="catalog-btn-icon">☰</span><span>Catalog</span>
+          </button>
+          <div class="catalog-menu">
+            <div class="catalog-menu-inner" id="catalogMenuInner">
+              <div class="catalog-loading">Loading catalog...</div>
+            </div>
           </div>
         </div>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="#leagues">Leagues</a>
+          <a href="#about">About</a>
+        </nav>
       </div>
-
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="#leagues">Leagues</a>
-        <a href="#about">About</a>
-      </nav>
+      <div class="header-actions">
+        <div id="currencyContainer"></div>
+        <button id="themeToggle" class="action-btn theme-toggle" type="button" aria-label="Switch theme">
+          <span class="theme-icon theme-icon-moon">☾</span>
+          <span class="theme-icon theme-icon-sun">☀</span>
+        </button>
+        <button class="action-btn" type="button">Search</button>
+        <button class="action-btn" type="button">Account</button>
+        <a href="checkout.html" class="cart-btn" id="cartBtn">Cart (0)</a>
+      </div>
     </div>
-
-    <div class="header-actions">
-      <button
-        id="themeToggle"
-        class="action-btn theme-toggle"
-        type="button"
-        aria-label="Switch theme"
-        title="Switch theme"
-      >
-        <span class="theme-icon theme-icon-moon">☾</span>
-        <span class="theme-icon theme-icon-sun">☀</span>
-      </button>
-
-      <button class="action-btn" type="button">Search</button>
-      <button class="action-btn" type="button">Account</button>
-      <button class="cart-btn" type="button">Cart (0)</button>
-    </div>
-  </div>
-</header>
+  </header>
 
   <main>
     <section class="hero">
@@ -66,11 +51,9 @@
         <div class="hero-content">
           <p class="eyebrow">OFFICIAL FOOTBALL SHIRTS</p>
           <h1>Choose your league.<br>Find your club.</h1>
-          <p class="hero-text">
-            Explore top European football leagues and shop shirts inside dedicated league catalogues.
-          </p>
+          <p class="hero-text">Explore top European football leagues and shop shirts inside dedicated league catalogues.</p>
           <div class="hero-buttons">
-            <a href="#leagues" class="btn btn-dark">Shop by league</a>
+            <a href="catalog.html" class="btn btn-dark">Shop all</a>
             <a href="#about" class="btn btn-light">Learn more</a>
           </div>
         </div>
@@ -82,40 +65,47 @@
       </div>
     </section>
 
+    <section class="products-section" id="new-arrivals">
+      <div class="container">
+        <div class="section-head"><h2>New arrivals</h2><a href="catalog.html">All products</a></div>
+        <div class="product-slider-wrapper">
+          <button class="league-arrow league-arrow-left" id="newLeft" type="button">‹</button>
+          <div class="product-slider" id="newArrivalsSlider"><div class="ps-loading">Loading...</div></div>
+          <button class="league-arrow league-arrow-right" id="newRight" type="button">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section" id="featured">
+      <div class="container">
+        <div class="section-head"><h2>Featured shirts</h2><a href="catalog.html">View all</a></div>
+        <div class="product-slider-wrapper">
+          <button class="league-arrow league-arrow-left" id="featuredLeft" type="button">‹</button>
+          <div class="product-slider" id="featuredSlider"><div class="ps-loading">Loading...</div></div>
+          <button class="league-arrow league-arrow-right" id="featuredRight" type="button">›</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="categorySections"></div>
+
     <section class="collections leagues-section" id="leagues">
       <div class="container">
-        <div class="section-head">
-          <h2>Shop by league</h2>
-          <a href="#">All leagues</a>
-        </div>
-
+        <div class="section-head"><h2>Shop by league</h2><a href="catalog.html">All categories</a></div>
         <div class="league-slider-wrapper">
           <button class="league-arrow league-arrow-left" id="leagueLeft" type="button">‹</button>
           <div class="league-slider" id="leagueSlider">
-            <a href="catalog.html?league=premier-league" class="collection-card">
-              <div class="collection-image"><div class="collection-placeholder">Premier League</div></div>
-              <h3>Premier League</h3>
-              <p>English clubs and shirts from the top tier.</p>
+            <a href="catalog.html?s=club-shirts" class="collection-card">
+              <div class="collection-image"><div class="collection-placeholder">Club Shirts</div></div>
+              <h3>Club Shirts</h3><p>All club jerseys from top leagues.</p>
             </a>
-            <a href="catalog.html?league=laliga" class="collection-card">
-              <div class="collection-image"><div class="collection-placeholder">LALIGA</div></div>
-              <h3>LALIGA</h3>
-              <p>Spanish club shirts in one dedicated catalogue.</p>
+            <a href="catalog.html?s=national-teams" class="collection-card">
+              <div class="collection-image"><div class="collection-placeholder">National Teams</div></div>
+              <h3>National Teams</h3><p>Official national team shirts.</p>
             </a>
-            <a href="catalog.html?league=serie-a" class="collection-card">
-              <div class="collection-image"><div class="collection-placeholder">Serie A</div></div>
-              <h3>Serie A</h3>
-              <p>Italian football shirts from leading clubs.</p>
-            </a>
-            <a href="catalog.html?league=bundesliga" class="collection-card">
-              <div class="collection-image"><div class="collection-placeholder">Bundesliga</div></div>
-              <h3>Bundesliga</h3>
-              <p>German league kits and club collections.</p>
-            </a>
-            <a href="catalog.html?league=ligue-1" class="collection-card">
-              <div class="collection-image"><div class="collection-placeholder">Ligue 1</div></div>
-              <h3>Ligue 1</h3>
-              <p>French league shirts in a separate store section.</p>
+            <a href="catalog.html?s=retro-shirts" class="collection-card">
+              <div class="collection-image"><div class="collection-placeholder">Retro Shirts</div></div>
+              <h3>Retro Shirts</h3><p>Classic vintage football jerseys.</p>
             </a>
           </div>
           <button class="league-arrow league-arrow-right" id="leagueRight" type="button">›</button>
@@ -144,13 +134,12 @@
         <p class="footer-text">Modern football shirt store concept.</p>
       </div>
       <div>
-        <h4>Leagues</h4>
+        <h4>Shop</h4>
         <ul>
-          <li><a href="catalog.html?league=premier-league">Premier League</a></li>
-          <li><a href="catalog.html?league=laliga">LALIGA</a></li>
-          <li><a href="catalog.html?league=serie-a">Serie A</a></li>
-          <li><a href="catalog.html?league=bundesliga">Bundesliga</a></li>
-          <li><a href="catalog.html?league=ligue-1">Ligue 1</a></li>
+          <li><a href="catalog.html">All products</a></li>
+          <li><a href="catalog.html?s=club-shirts">Club Shirts</a></li>
+          <li><a href="catalog.html?s=national-teams">National Teams</a></li>
+          <li><a href="catalog.html?s=retro-shirts">Retro Shirts</a></li>
         </ul>
       </div>
       <div>
@@ -173,18 +162,8 @@
     </div>
   </footer>
 
-  <button
-    id="themeToggle"
-    class="action-btn theme-toggle"
-    type="button"
-    aria-label="Switch theme"
-    title="Switch theme"
-    >
-    <span class="theme-icon theme-icon-moon">☾</span>
-    <span class="theme-icon theme-icon-sun">☀</span>
-  </button>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/currency.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

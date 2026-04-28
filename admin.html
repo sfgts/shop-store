@@ -7,282 +7,203 @@
   <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
-  <div class="admin-page">
-    <aside class="sidebar">
-      <div class="sidebar-logo">FCStore<span>UA</span></div>
+<div class="admin-page">
 
-      <nav class="sidebar-nav">
-        <a href="#heroPanel" class="active">Hero</a>
-        <a href="#catalogPanel">Catalog</a>
-        <a href="#collectionsPanel">Collections</a>
-        <a href="#productsPanel">Products</a>
-      </nav>
-    </aside>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">FCStore<span>UA</span></div>
+    <nav class="sidebar-nav">
+      <a href="#" data-panel="heroPanel">Hero</a>
+      <a href="#" data-panel="catalogPanel">Catalog</a>
+      <a href="#" data-panel="collectionsPanel">Collections</a>
+      <a href="#" data-panel="productsPanel" class="active">Products</a>
+      <a href="#" data-panel="settingsPanel">Settings</a>
+    </nav>
+    <button class="sidebar-theme-btn" id="adminThemeBtn" type="button">
+      <span id="adminThemeIcon">☀</span>
+      <span id="adminThemeLabel">Dark mode</span>
+    </button>
+  </aside>
 
-    <main class="main-content">
-      <header class="topbar">
-        <div>
-          <p class="topbar-label">Admin panel</p>
-          <h1>Manage storefront content</h1>
-        </div>
-      </header>
+  <!-- MAIN -->
+  <main class="main-content">
+    <header class="topbar">
+      <p class="topbar-label">Admin panel</p>
+      <h1>Manage storefront content</h1>
+    </header>
 
-      
-      <section class="admin-sections">
+    <div class="admin-panels">
 
-        <!-- HERO -->
-        <section class="panel" id="heroPanel">
-          <div class="panel-head">
-            <h2>Hero slider settings</h2>
-            <p>Add up to 4 images for the first block slider. One path per field.</p>
+      <!-- ══ HERO ══ -->
+      <div class="panel" id="heroPanel">
+        <button class="panel-head" type="button">
+          <div>
+            <h2>Hero slider</h2>
+            <p>Up to 4 images — uploaded to Supabase Storage</p>
           </div>
-
-          <form id="heroForm" class="product-form">
-            <div class="form-group">
-              <label for="heroImage1">Hero image 1</label>
-              <input type="text" id="heroImage1" placeholder="images/hero/barca2526 home.png" />
+          <span class="panel-chevron">▾</span>
+        </button>
+        <div class="panel-body">
+          <div class="aform">
+            <div class="fg">
+              <label>Slide photos <span class="hint">click to upload · drag &amp; drop supported</span></label>
+              <div class="img-upload-grid">
+                <label class="img-slot" id="heroSlot0"><input type="file" accept="image/*" class="hero-file-input" data-slot="0" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Slide 1</span></div></label>
+                <label class="img-slot" id="heroSlot1"><input type="file" accept="image/*" class="hero-file-input" data-slot="1" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Slide 2</span></div></label>
+                <label class="img-slot" id="heroSlot2"><input type="file" accept="image/*" class="hero-file-input" data-slot="2" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Slide 3</span></div></label>
+                <label class="img-slot" id="heroSlot3"><input type="file" accept="image/*" class="hero-file-input" data-slot="3" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Slide 4</span></div></label>
+              </div>
+              <div id="heroUploadStatus" class="status-msg"></div>
             </div>
-
-            <div class="form-group">
-              <label for="heroImage2">Hero image 2</label>
-              <input type="text" id="heroImage2" placeholder="images/hero/barca2526 third.png" />
+            <div class="factions">
+              <button type="button" class="btn btn-dark" id="heroSaveBtn">Save hero slider</button>
             </div>
-
-            <div class="form-group">
-              <label for="heroImage3">Hero image 3</label>
-              <input type="text" id="heroImage3" placeholder="images/hero/chelsea2526 third.png" />
-            </div>
-
-            <div class="form-group">
-              <label for="heroImage4">Hero image 4</label>
-              <input type="text" id="heroImage4" placeholder="images/hero/optional-image.png" />
-            </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-dark">Save hero slider</button>
-            </div>
-          </form>
-        </section>
-
-        <!-- CATALOG -->
-<section class="panel" id="catalogPanel">
-  <div class="panel-head">
-    <h2>Catalog management</h2>
-    <p>Manage menu sections, columns and links without editing site code.</p>
-  </div>
-
-  <div class="catalog-admin-layout">
-    <div class="catalog-admin-side">
-      <div class="panel-head catalog-subhead">
-        <h3>Add catalog section</h3>
-        <p>Create top-level menu items like Premier League or LALIGA.</p>
-      </div>
-
-      <form id="catalogSectionForm" class="product-form">
-        <div class="form-group">
-          <label for="sectionName">Section name</label>
-          <input type="text" id="sectionName" placeholder="Premier League" />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="sectionSlug">Slug</label>
-            <input type="text" id="sectionSlug" placeholder="premier-league" />
-          </div>
-
-          <div class="form-group">
-            <label for="sectionOrder">Sort order</label>
-            <input type="number" id="sectionOrder" placeholder="1" />
+            <div id="heroSaveStatus" class="status-msg"></div>
           </div>
         </div>
-
-        <div class="form-row checks">
-          <label class="check-item">
-            <input type="checkbox" id="sectionActive" checked />
-            <span>Active</span>
-          </label>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-dark">Save section</button>
-          <button type="reset" class="btn btn-light">Clear</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="catalog-admin-main">
-      <div class="panel-head catalog-subhead">
-        <h3>Sections list</h3>
-        <p>Saved catalog sections will appear here.</p>
       </div>
 
-      <div id="catalogSectionsList" class="catalog-entity-list">
-        <div class="empty-state">No catalog sections added yet.</div>
+      <!-- ══ CATALOG ══ -->
+      <div class="panel" id="catalogPanel">
+        <button class="panel-head" type="button">
+          <div>
+            <h2>Catalog management</h2>
+            <p>Sections → Columns (leagues) → Links (teams)</p>
+          </div>
+          <span class="panel-chevron">▾</span>
+        </button>
+        <div class="panel-body">
+
+          <div class="catalog-layout">
+            <div>
+              <div class="sub-head"><h3>Add section</h3><p>Top-level: Club shirts, National Teams...</p></div>
+              <form id="catalogSectionForm" class="aform">
+                <div class="fg"><label>Section name</label><input type="text" id="sectionName" placeholder="Club shirts" /></div>
+                <div class="frow">
+                  <div class="fg"><label>Slug</label><input type="text" id="sectionSlug" placeholder="club-shirts" /></div>
+                  <div class="fg"><label>Sort order</label><input type="number" id="sectionOrder" placeholder="1" /></div>
+                </div>
+                <div class="frow checks">
+                  <label class="check-item"><input type="checkbox" id="sectionActive" checked /><span>Active</span></label>
+                  <label class="check-item"><input type="checkbox" id="sectionShowHomepage" /><span>Show on homepage</span></label>
+                </div>
+                <div class="factions">
+                  <button type="submit" class="btn btn-dark">Save section</button>
+                  <button type="reset" class="btn btn-light">Clear</button>
+                </div>
+              </form>
+            </div>
+            <div>
+              <div class="sub-head"><h3>Sections list</h3></div>
+              <div id="catalogSectionsList" class="entity-list"><div class="empty-state">No sections yet.</div></div>
+            </div>
+          </div>
+
+          <div class="catalog-grid">
+            <div>
+              <div class="sub-head"><h3>Add column (league)</h3></div>
+              <form id="catalogColumnForm" class="aform">
+                <div class="fg"><label>Parent section</label><select id="columnSection"><option value="">Select section</option></select></div>
+                <div class="fg"><label>Column title</label><input type="text" id="columnTitle" placeholder="Premier League" /></div>
+                <div class="fg"><label>Sort order</label><input type="number" id="columnOrder" placeholder="1" /></div>
+                <div class="factions"><button type="submit" class="btn btn-dark">Save column</button></div>
+              </form>
+              <div id="catalogColumnsList" class="entity-list mt-sm"><div class="empty-state">No columns yet.</div></div>
+            </div>
+            <div>
+              <div class="sub-head"><h3>Add link (team)</h3></div>
+              <form id="catalogLinkForm" class="aform">
+                <div class="fg"><label>Parent column</label><select id="linkColumn"><option value="">Select column</option></select></div>
+                <div class="fg"><label>Link label</label><input type="text" id="linkLabel" placeholder="Arsenal" /></div>
+                <div class="fg"><label>URL <span class="hint">auto-generated</span></label><input type="text" id="linkUrl" placeholder="auto" /></div>
+                <div class="fg"><label>Sort order</label><input type="number" id="linkOrder" placeholder="1" /></div>
+                <div class="frow checks"><label class="check-item"><input type="checkbox" id="linkActive" checked /><span>Active</span></label></div>
+                <div class="factions"><button type="submit" class="btn btn-dark">Save link</button></div>
+              </form>
+              <div id="catalogLinksList" class="entity-list mt-sm"><div class="empty-state">No links yet.</div></div>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="catalog-admin-grid">
-    <div class="catalog-box">
-      <div class="panel-head catalog-subhead">
-        <h3>Add column</h3>
-        <p>Add columns inside a selected section, for example Top clubs or Extras.</p>
-      </div>
-
-      <form id="catalogColumnForm" class="product-form">
-        <div class="form-group">
-          <label for="columnSection">Parent section</label>
-          <select id="columnSection">
-            <option value="">Select section</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="columnTitle">Column title</label>
-          <input type="text" id="columnTitle" placeholder="Top clubs" />
-        </div>
-
-        <div class="form-group">
-          <label for="columnOrder">Sort order</label>
-          <input type="number" id="columnOrder" placeholder="1" />
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-dark">Save column</button>
-        </div>
-      </form>
-
-      <div id="catalogColumnsList" class="catalog-entity-list compact-list">
-        <div class="empty-state">No columns added yet.</div>
-      </div>
-    </div>
-
-    <div class="catalog-box">
-      <div class="panel-head catalog-subhead">
-        <h3>Add link</h3>
-        <p>Add links inside a selected column, for example Arsenal or Home shirts.</p>
-      </div>
-
-      <form id="catalogLinkForm" class="product-form">
-        <div class="form-group">
-          <label for="linkColumn">Parent column</label>
-          <select id="linkColumn">
-            <option value="">Select column</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="linkLabel">Link label</label>
-          <input type="text" id="linkLabel" placeholder="Arsenal" />
-        </div>
-
-        <div class="form-group">
-          <label for="linkUrl">URL</label>
-          <input type="text" id="linkUrl" placeholder="/catalog/premier-league/arsenal" />
-        </div>
-
-        <div class="form-group">
-          <label for="linkOrder">Sort order</label>
-          <input type="number" id="linkOrder" placeholder="1" />
-        </div>
-
-        <div class="form-row checks">
-          <label class="check-item">
-            <input type="checkbox" id="linkActive" checked />
-            <span>Active</span>
-          </label>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-dark">Save link</button>
-        </div>
-      </form>
-
-      <div id="catalogLinksList" class="catalog-entity-list compact-list">
-        <div class="empty-state">No links added yet.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-        <!-- COLLECTIONS -->
-        <section class="panel" id="collectionsPanel">
-          <div class="panel-head">
+      <!-- ══ COLLECTIONS ══ -->
+      <div class="panel" id="collectionsPanel">
+        <button class="panel-head" type="button">
+          <div>
             <h2>Collection images</h2>
-            <p>Set images for Home, Away, Third and Retro cards on the homepage.</p>
+            <p>Images for kit type cards on the homepage</p>
           </div>
-
-          <form id="collectionsForm" class="product-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="collectionHome">Home Kit image</label>
-                <input type="text" id="collectionHome" placeholder="images/collections/man-u2526 home.png" />
-              </div>
-
-              <div class="form-group">
-                <label for="collectionAway">Away Kit image</label>
-                <input type="text" id="collectionAway" placeholder="images/collections/shakhtar2526away.png" />
-              </div>
+          <span class="panel-chevron">▾</span>
+        </button>
+        <div class="panel-body">
+          <form id="collectionsForm" class="aform">
+            <div class="frow">
+              <div class="fg"><label>Home Kit</label><input type="text" id="collectionHome" placeholder="images/collections/home.png" /></div>
+              <div class="fg"><label>Away Kit</label><input type="text" id="collectionAway" placeholder="images/collections/away.png" /></div>
             </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="collectionThird">Third Kit image</label>
-                <input type="text" id="collectionThird" placeholder="images/collections/real2526third.png" />
-              </div>
-
-              <div class="form-group">
-                <label for="collectionRetro">Retro image</label>
-                <input type="text" id="collectionRetro" placeholder="images/collections/retro-shirt.png" />
-              </div>
+            <div class="frow">
+              <div class="fg"><label>Third Kit</label><input type="text" id="collectionThird" placeholder="images/collections/third.png" /></div>
+              <div class="fg"><label>Retro</label><input type="text" id="collectionRetro" placeholder="images/collections/retro.png" /></div>
             </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-dark">Save collection images</button>
-            </div>
+            <div class="factions"><button type="submit" class="btn btn-dark">Save collection images</button></div>
           </form>
-        </section>
+        </div>
+      </div>
 
-        <!-- PRODUCTS -->
-        <section class="panel" id="productsPanel">
-          <div class="panel-head">
-            <h2>Add new shirt</h2>
-            <p>Create product cards using file paths from your images/products folder.</p>
+      <!-- ══ PRODUCTS ══ -->
+      <div class="panel open" id="productsPanel">
+        <button class="panel-head" type="button">
+          <div>
+            <h2>Add / edit shirt</h2>
+            <p>All data saved to Supabase</p>
           </div>
-
+          <span class="panel-chevron">▾</span>
+        </button>
+        <div class="panel-body">
           <div class="products-layout">
-            <form id="productForm" class="product-form">
-              <div class="form-group">
-                <label for="title">Product title</label>
+
+            <!-- FORM -->
+            <form id="productForm" class="aform">
+
+              <div class="fg">
+                <label>Product title</label>
                 <input type="text" id="title" placeholder="Barcelona Home Shirt 25/26" required />
               </div>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="price">Price (€)</label>
-                  <input type="number" id="price" placeholder="89.99" step="0.01" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="oldPrice">Old price (€)</label>
-                  <input type="number" id="oldPrice" placeholder="99.99" step="0.01" />
+              <div class="fg">
+                <label>URL slug <span class="hint">auto-generated</span></label>
+                <div class="slug-wrap">
+                  <span class="slug-prefix">/product/</span>
+                  <input type="text" id="productSlug" placeholder="barcelona-home-shirt-2526" />
                 </div>
               </div>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="category">Category</label>
-                  <select id="category" required>
-                    <option value="">Select category</option>
-                    <option value="home">Home Kit</option>
-                    <option value="away">Away Kit</option>
-                    <option value="third">Third Kit</option>
-                    <option value="retro">Retro</option>
-                  </select>
+              <div class="fg">
+                <label>Prices <span class="hint">fill in each currency you sell in</span></label>
+                <div class="price-grid">
+                  <div class="price-col"><span class="pcur">€ EUR</span><input type="number" id="priceEur" placeholder="89.99" step="0.01" /></div>
+                  <div class="price-col"><span class="pcur">$ USD</span><input type="number" id="priceUsd" placeholder="95.99" step="0.01" /></div>
+                  <div class="price-col"><span class="pcur">₴ UAH</span><input type="number" id="priceUah" placeholder="3999" step="1" /></div>
                 </div>
+              </div>
 
-                <div class="form-group">
-                  <label for="badge">Badge</label>
+              <div class="fg">
+                <label>Old prices <span class="hint">optional strikethrough</span></label>
+                <div class="price-grid">
+                  <div class="price-col"><span class="pcur">€ EUR</span><input type="number" id="oldPriceEur" placeholder="99.99" step="0.01" /></div>
+                  <div class="price-col"><span class="pcur">$ USD</span><input type="number" id="oldPriceUsd" placeholder="109.99" step="0.01" /></div>
+                  <div class="price-col"><span class="pcur">₴ UAH</span><input type="number" id="oldPriceUah" placeholder="4499" step="1" /></div>
+                </div>
+              </div>
+
+              <div class="frow">
+                <div class="fg">
+                  <label>Category</label>
+                  <select id="category" required><option value="">Loading...</option></select>
+                </div>
+                <div class="fg">
+                  <label>Badge</label>
                   <select id="badge">
                     <option value="">No badge</option>
                     <option value="new">New</option>
@@ -293,56 +214,108 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="description">Description</label>
-                <textarea
-                  id="description"
-                  rows="4"
-                  placeholder="Official style football jersey with premium fabric."
-                ></textarea>
+              <div class="fg">
+                <label>Team <span class="hint">links product to a team page</span></label>
+                <div class="team-cascade">
+                  <select id="teamSection" class="team-sel"><option value="">— no team —</option></select>
+                  <select id="teamColumn" class="team-sel" disabled><option value="">Select league</option></select>
+                  <select id="teamLink" class="team-sel" disabled><option value="">Select team</option></select>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label for="image">Product image path</label>
-                <input type="text" id="image" placeholder="images/products/ukraine26home.png" />
+              <div class="fg">
+                <label>Description</label>
+                <textarea id="description" rows="3" placeholder="Official style football jersey..."></textarea>
               </div>
 
-              <div class="form-row checks">
-                <label class="check-item">
-                  <input type="checkbox" id="featured" />
-                  <span>Featured product</span>
-                </label>
-
-                <label class="check-item">
-                  <input type="checkbox" id="inStock" checked />
-                  <span>In stock</span>
-                </label>
+              <div class="fg">
+                <label>Product photos <span class="hint">up to 4, Supabase Storage</span></label>
+                <div class="img-upload-grid">
+                  <label class="img-slot" id="slot0"><input type="file" accept="image/*" class="img-file-input" data-slot="0" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Photo 1</span></div></label>
+                  <label class="img-slot" id="slot1"><input type="file" accept="image/*" class="img-file-input" data-slot="1" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Photo 2</span></div></label>
+                  <label class="img-slot" id="slot2"><input type="file" accept="image/*" class="img-file-input" data-slot="2" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Photo 3</span></div></label>
+                  <label class="img-slot" id="slot3"><input type="file" accept="image/*" class="img-file-input" data-slot="3" /><div class="img-slot-inner"><span class="img-icon">+</span><span class="img-label">Photo 4</span></div></label>
+                </div>
+                <div id="imgUploadStatus" class="status-msg"></div>
               </div>
 
-              <div class="form-actions">
-                <button type="submit" class="btn btn-dark">Save product</button>
+              <div class="fg">
+                <label>Sizes &amp; stock</label>
+                <div class="sizes-wrap">
+                  <div class="size-presets">
+                    <button type="button" class="size-preset" data-size="XS">XS</button>
+                    <button type="button" class="size-preset" data-size="S">S</button>
+                    <button type="button" class="size-preset" data-size="M">M</button>
+                    <button type="button" class="size-preset" data-size="L">L</button>
+                    <button type="button" class="size-preset" data-size="XL">XL</button>
+                    <button type="button" class="size-preset" data-size="XXL">XXL</button>
+                  </div>
+                  <div id="sizesList"></div>
+                  <div class="size-custom-row">
+                    <input type="text" id="customSizeInput" placeholder="Custom (e.g. 3XL)" class="size-custom-input" />
+                    <button type="button" id="addCustomSizeBtn" class="btn btn-light">Add</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="frow checks">
+                <label class="check-item"><input type="checkbox" id="featured" /><span>Featured</span></label>
+                <label class="check-item"><input type="checkbox" id="inStock" checked /><span>In stock</span></label>
+                <label class="check-item"><input type="checkbox" id="isVisible" checked /><span>Visible on site</span></label>
+              </div>
+
+              <div class="factions">
+                <button type="submit" class="btn btn-dark" id="productSubmitBtn">Save product</button>
                 <button type="reset" class="btn btn-light">Clear</button>
               </div>
+              <div id="productSaveStatus" class="status-msg"></div>
             </form>
 
+            <!-- LIST -->
             <div class="products-side">
-              <div class="panel-head products-side-head">
-                <h2>Products list</h2>
-                <p>Saved shirts will appear here.</p>
-              </div>
-
-              <div id="productsList" class="products-list">
-                <div class="empty-state">No products added yet.</div>
-              </div>
+              <div class="sub-head"><h3>Products list</h3><p>Saved in Supabase</p></div>
+              <div id="productsList" class="products-list"><div class="empty-state">Loading...</div></div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
 
-      </section>
-    </main>
-  </div>
+      <!-- ══ SETTINGS ══ -->
+      <div class="panel" id="settingsPanel">
+        <button class="panel-head" type="button">
+          <div>
+            <h2>✏ Personalization add-on</h2>
+            <p>Global price for name &amp; number printing — added on top of product price</p>
+          </div>
+          <span class="panel-chevron">▾</span>
+        </button>
+        <div class="panel-body">
+          <form id="personalizationForm" class="aform">
+            <div class="frow checks">
+              <label class="check-item">
+                <input type="checkbox" id="personalEnabled" checked />
+                <span>Enable personalization option on all products</span>
+              </label>
+            </div>
+            <div class="fg">
+              <label>Personalization prices <span class="hint">added on top of product price</span></label>
+              <div class="price-grid">
+                <div class="price-col"><span class="pcur">€ EUR</span><input type="number" id="personalPriceEur" value="30" step="0.01" /></div>
+                <div class="price-col"><span class="pcur">$ USD</span><input type="number" id="personalPriceUsd" value="32" step="0.01" /></div>
+                <div class="price-col"><span class="pcur">₴ UAH</span><input type="number" id="personalPriceUah" value="1200" step="1" /></div>
+              </div>
+            </div>
+            <div class="factions"><button type="submit" class="btn btn-dark">Save settings</button></div>
+            <div id="personalizationStatus" class="status-msg"></div>
+          </form>
+        </div>
+      </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/admin.js"></script>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/admin.js"></script>
 </body>
 </html>
